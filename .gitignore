@@ -1,0 +1,16 @@
+*/bin
+*/gen
+build
+app/build
+lib/src/main/obj
+
+# IntelliJ Setting
+.idea/
+*.iml
+*.iws
+
+# Gradle Setting
+.gradle/
+gradle/*
+gradlew*
+local.properties

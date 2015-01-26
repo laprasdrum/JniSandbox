@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion = rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 15
+    }
+    // want to use custom Android.mk / Application.mk.
+    // and don't need the following setting.
+    //    defaultConfig {
+    //        ndk {
+    //            moduleName "hello-jni"
+    //            stl "stlport_shared"
+    //            cFlags "-std=c++11 -frtti -fexceptions -pthread"
+    //            ldLibs "lgnustl_static"
+    //        }
+    //    }
+
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/libs' // .so library directory
+        jni.srcDirs = []               // want gradle not to work ndk-build task, but do via console.
+    }
+}

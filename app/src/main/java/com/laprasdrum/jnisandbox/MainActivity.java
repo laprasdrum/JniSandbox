@@ -64,6 +64,8 @@ public class MainActivity extends Activity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             ButterKnife.inject(this, rootView);
 
+            String runtime = isArtInUse() ? "ART" : "Dalvik";
+            Log.i(TAG, "VM: " + runtime);
             Log.i(TAG, "Architecture: " + NdkManager.getInstance().stringFromJNI());
             int sum = NdkManager.getInstance().addTwoFromJNI(2, 3);
             Log.i(TAG, "2 + 3: " + sum);
@@ -87,6 +89,11 @@ public class MainActivity extends Activity {
         public void onDestroyView() {
             super.onDestroyView();
             ButterKnife.reset(this);
+        }
+
+        private boolean isArtInUse() {
+            final String vmVersion = System.getProperty("java.vm.version");
+            return vmVersion != null && vmVersion.startsWith("2");
         }
     }
 }
